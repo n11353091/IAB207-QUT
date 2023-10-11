@@ -7,13 +7,14 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     type = db.column(db.String(20))
-    event_date = db.Column(db.Text) # change to 
-    start_time = db.column(db.Text)
-    end_time = db.column(db.Text)
+    status = db.column(db.String)
+    event_date = db.Column(db.String) # change to 
+    start_time = db.column(db.String)
+    end_time = db.column(db.String)
     location = db.column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
-    expire_date = db.Column(db.Text)
+    expire_date = db.Column(db.String)
     #price = db.Column(db.Integer) #no need for price as it is always free
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
