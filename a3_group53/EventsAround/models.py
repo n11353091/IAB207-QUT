@@ -6,18 +6,18 @@ class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    types = db.column(db.String(20))
-    event_date = db.Column(db.DateTime.date)
-    start_time = db.column(db.DateTime.time)
-    end_time = db.column(db.DateTime.time)
+    type = db.column(db.String(20))
+    event_date = db.Column(db.Text) # change to 
+    start_time = db.column(db.Text)
+    end_time = db.column(db.Text)
     location = db.column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
-    expire_date = db.Column(db.DateTime.date)
-    price = db.Column(db.Integer)
+    expire_date = db.Column(db.Text)
+    #price = db.Column(db.Integer) #no need for price as it is always free
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
-    comments = db.relationship('Comment', backref='event')
+    comment_id = db.relationship('Comment', backref='event')
 	
     # string print method
     def __repr__(self):
@@ -36,3 +36,18 @@ class Order(db.Model):
     # string print method
     def __repr__(self):
         return f"Order: {self.id} Booking Date: {self.created_at} Event Info: {self.event_name} Event Picture: {self.event_image}"
+
+#Created class "Comment"
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(400))
+    created_at = db.Column(db.DateTime, default=datetime.now())
+
+    #add the foreign keys
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
+
+    def __repr__(self):
+        return "<Comment: {}>".format(self.text)
