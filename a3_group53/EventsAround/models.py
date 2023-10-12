@@ -52,9 +52,10 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    Comment = db.Column(db.String(200))
+    text = db.Column(db.String(200))
     date_posted = db.Column(db.DateTime.date)
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return f"<Comment by {self.name} on {self.date_posted}>"
