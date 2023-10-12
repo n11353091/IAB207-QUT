@@ -36,3 +36,12 @@ class Order(db.Model):
     # string print method
     def __repr__(self):
         return f"Order: {self.id} Booking Date: {self.created_at} Event Info: {self.event_name} Event Picture: {self.event_image}"
+
+class User(db.Model, UserMixin):
+    __tablename__='users' 
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), index=True, unique=True, nullable=False)
+    emailid = db.Column(db.String(100), index=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+
+    comments = db.relationship('Comment', backref='user')
