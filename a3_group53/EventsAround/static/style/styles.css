@@ -1,0 +1,178 @@
+*
+{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: sans-serif;
+}
+.navbar {
+  background-image: linear-gradient(to right, orangered, orange );
+  margin-bottom: 50px;
+}
+.btn-light-blue {
+  background-color: rgb(50, 195, 243); /* Set the background color to light blue */
+  border-color: rgb(50, 195, 243); /* Set the border color to light blue */
+  color: white; /* Set the text color (e.g., dark gray) */
+}
+.ticket-table{
+  margin-top: 60px;
+}
+
+.chevron-container {
+  display: flex;
+  flex-direction: row; /* Ensure horizontal alignment */
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px; /* Add padding to create space for the first arrow */
+}
+
+                                  /* Final BLUE chevron arrow */
+.chevron-blue-right {
+  position: relative;
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 6px;
+  height: 60px;
+  width: 20%;
+  max-width: 250px;
+}
+
+.chevron-blue-right:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(to right, blue, #2196F3 );
+  transform: skew(25deg, 0deg);
+}
+
+.chevron-blue-right:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(to right, blue, #2196F3 ); 
+  transform: skew(-25deg, 0deg);
+}
+
+                                  /* Final ORANGE chevron arrow */
+.chevron-orange-right {
+  position: relative;
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 6px;
+  height: 60px;
+  width: 100px;
+}
+
+.chevron-orange-right:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(to right, orangered, orange ); 
+  transform: skew(25deg, 0deg);
+}
+
+.chevron-orange-right:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: linear-gradient(to right, orangered, orange );
+  transform: skew(-25deg, 0deg);
+}
+
+.chevron-text {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; 
+  font-size: 16px; 
+}
+
+
+
+
+
+/* Searth */
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.search input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit search button */
+form.search button {
+  float: left;
+  width: 20%;
+  padding: 14.5px;
+  background: linear-gradient(to right, blue, #2196F3 );
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.search button:hover {
+  background: linear-gradient(to right, blue, #2196F3 );
+}
+
+/* Clear floats */
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+/*  */
+
+
+/* Pagination padding: */
+.pagination-container {
+  max-width: 100px;
+}
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+/* Page heading text colour for future*/
+.page-heading{
+  color:#2196F3;
+}
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;}
