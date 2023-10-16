@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% import "bootstrap4/form.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+  <div class="text-center"><h2>Let Us take care of Your plans!</h2></div><br>
+  <div class="row">
+  <!-- Left Column for Image -->
+  <div class="col-lg-6">
+      <h4><b>{{event.name}}<button type="button" class="btn btn-success">{{event.status}}</button></b></h4> <!-- Make open status stand out like a button -->
+      <p>{{event.description}}</p>
+      </div>
+      <!-- Right Column for Text -->
+      <div class="col-lg-6 text-left">
+        <img class="card-img-top" src="{{event.image}}" alt="{{event.name}}">
+        <br><b>When and where?</b><br>
+        <p> {{event.event_date}} {{event.start_time}}-{{event.end_time}} AEST</p>
+        <p>{{event.location}}</p>
+
+        
+        <div class="coment-bottom bg-white p-2 px-4">
+            
+            <!--Profile picture + comment input field -->
+        <!-- <div class="d-flex flex-row add-comment-section mt-4 mb-4"><img class="img-fluid img-responsive rounded-circle mr-2"><input type="text" class="form-control mr-3" placeholder="Add comment"><button class="btn btn-primary btn-light-blue" type="button">Comment</button></div> -->
+            <!-- Comment 1 -->
+              {{wtf.render_form(form, url_for('event.comment', event=event.id))}} 
+              {% for comment in comments %}
+                <div class="d-flex flex-row align-items-center commented-user">
+                    <h5 class="mr-2">{{comment.user.name}}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">{{comment.created_at}}</span></div>
+                <div class="comment-text-sm"><span>{{comment.text}}</span></div>
+              {% endfor %}
+                </div>
+            </div>
+          </div>
+
+        </div>
+        <a href="{{url_for('event.book', event=event.id)}}">
+            <button class="flex-shrink-1 btn btn-primary btn-light-blue col-lg-12">Book a free spot</button>
+        </a>
+    </div>
+{% endblock %}

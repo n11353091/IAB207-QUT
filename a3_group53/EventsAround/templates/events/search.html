@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container col-md-6">
+    <!-- Search -->
+    <form class="search">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    <!-- Filter -->
+<div class="chevron-container">
+    <div class="chevron-orange-right">
+       <span class="chevron-text">Career</span>
+    </div>
+    <div class="chevron-orange-right">
+       <span class="chevron-text">Health</span>
+    </div>
+    <div class="chevron-orange-right">
+       <span class="chevron-text">Sales</span>
+    </div>
+    <div class="chevron-orange-right">
+       <span class="chevron-text">Tradeshows</span>
+    </div>
+    <div class="chevron-orange-right">
+       <span class="chevron-text">Business</span>
+    </div>
+  </div>
+  
+  <div class="chevron-container">
+     <div class="chevron-blue-right">
+       <span class="chevron-text">Networking</span>
+     </div>
+     <div class="chevron-blue-right">
+       <span class="chevron-text">Education</span>
+     </div>
+     <div class="chevron-blue-right">
+       <span class="chevron-text">Marketing</span>
+     </div>
+     <div class="chevron-blue-right">
+       <span class="chevron-text">Innovation</span>
+     </div>
+  </div>
+</div>
+
+  {% endblock %}
+

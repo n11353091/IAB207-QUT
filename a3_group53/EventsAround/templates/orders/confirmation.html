@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% import "bootstrap4/form.html" as wtf %}
+{% block content %}
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <div class="container col-md-8 my-5 p-4 bg-light rounded shadow">
+            <h1>Congratulations!</h1>
+        <h2>
+            <p>
+                Please see your booking information bellow:
+            </p>
+            <p>
+                Order ID:{{orders.id}}
+                Event Name{{orders.event_name}}
+                Ticket Type{{orders.ticket_type}}
+                Ticket Number{{orders.ticket_type}}
+            </p>
+        </h2>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
