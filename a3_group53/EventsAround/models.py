@@ -2,16 +2,27 @@ from flask_login import UserMixin
 from . import db
 from datetime import datetime
 
+class User(db.Model, UserMixin):
+    __tablename__='users' # good practice to specify table name
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), index=True, unique=True, nullable=False)
+    emailid = db.Column(db.String(100), index=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    contact_number = db.Column(db.String(255))
+    address = db.Column(db.String(255))
+    # relation to call user.comments and comment.created_by
+    comments = db.relationship('Comment', backref='user')
+
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    type = db.column(db.String(20))
-    status = db.column(db.String)
-    event_date = db.Column(db.String) # change to 
-    start_time = db.column(db.String)
-    end_time = db.column(db.String)
-    location = db.column(db.String(80))
+    type = db.Column(db.String(20))
+    status = db.Column(db.String, default = "Open")
+    event_date = db.Column(db.String)
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
+    location = db.Column(db.String(80))
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
     expire_date = db.Column(db.String)
@@ -24,6 +35,7 @@ class Event(db.Model):
     def __repr__(self):
         return f"Name: {self.name}"
     
+    # *Needs to be added to sqlite db*
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
@@ -31,7 +43,8 @@ class Order(db.Model):
     # add the foreign key
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
-    event_price = db.Column(db.Integer, db.ForeignKey('events.price'))
+    ticket_type = db.Column(db.String)
+    ticket_number = db.Column(db.Integer)
     event_image = db.Column(db.String(400), db.ForeignKey('events.image'))
     event_name = db.Column(db.String(80), db.ForeignKey('events.name'))
     # string print method
