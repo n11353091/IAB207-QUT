@@ -120,17 +120,47 @@ def book(event):
       return redirect(url_for('event.book')) 
    return render_template('events/book.html', form=form)
 
-# @bp.route('/<event>/manage', methods=['GET', 'POST'])
-# @login_required
-# def manage(event_id):
-#     event = Event.query.get(event_id)
-#     form = EventForm(obj=event)  # Populate the form with the event's data
+@bp.route('/<event>/manage', methods=['GET', 'POST'])
+@login_required
+def manage(event_id):
+    form = EventForm()
 
-#     if form.validate_on_submit():
-#         # Update the event data
-#         form.populate_obj(event)
-#         db.session.commit()
-#         flash('Event updated successfully', 'success')
-#         return redirect(url_for('event.manage', event_id=event_id))
+    # Check event ownership
+    if event.owner_id != current_user.id:
+        flash('You do not have permission to manage this event.', 'danger')
+        return redirect(url_for('main.index'))  # Redirect to main index or suitable route
 
-#     return render_template('events/manage.html', form=form, event=event)
+    form = EventForm(obj=event)  # Populate the form with the event's data
+
+    if form.validate_on_submit():
+        if form.cancel.data:
+            event.status = "Closed"
+            flash('Event has been cancelled.', 'success')
+        else:
+            # Update the event attributes with the form data
+            event.name = form.name.data
+            event.type = form.type.data
+            event.event_date = form.event_date.data
+            event.start_time = form.start_time.data
+            event.end_time = form.end_time.data
+            event.location = form.location.data
+            event.description = form.description.data
+            event.expire_date = form.expire_date.data
+            event.image = form.image.data
+            flash('Event updated successfully', 'success')
+        
+        
+        try:
+            db.session.commit()
+            flash('Event updated successfully', 'success')
+            return redirect(url_for('event.details', event_id=event_id))  # Redirect to view the event's details
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error updating the event: {str(e)}', 'error')
+    
+
+    # Automatically update the event's status (if you have such a method on your Event model)
+    event.update_status()
+    db.session.commit()
+
+    return render_template('events/manage.html', form=form, event=event)
