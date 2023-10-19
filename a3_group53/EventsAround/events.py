@@ -42,9 +42,15 @@ def search():
 def create():
   print('Method type: ', request.method)
   form = EventForm()
-  if form.validate_on_submit():
-    #call the function that checks and returns image
-    db_file_path=check_upload_file(form)
+    event = Event(name=form.name.data,
+              ...
+              owner_id=current_user.id)
+    if form.validate_on_submit():
+        db_file_path = check_upload_file(form)
+        event = Event(name=form.name.data,
+                      owner_id=current_user.id,
+                      ...
+                      image=db_file_path)
     event=Event(name=form.name.data,
                 type=form.type.data,
                 event_date=form.event_date.data,
@@ -122,8 +128,8 @@ def book(event):
 
 @bp.route('/<event>/manage', methods=['GET', 'POST'])
 @login_required
-def manage(event_id):
-    form = EventForm()
+def manage(event):
+    event = Event.query.get_or_404(event_id)
 
     # Check event ownership
     if event.owner_id != current_user.id:
@@ -132,6 +138,7 @@ def manage(event_id):
 
     form = EventForm(obj=event)  # Populate the form with the event's data
 
+    
     if form.validate_on_submit():
         if form.cancel.data:
             event.status = "Closed"
@@ -147,9 +154,7 @@ def manage(event_id):
             event.description = form.description.data
             event.expire_date = form.expire_date.data
             event.image = form.image.data
-            flash('Event updated successfully', 'success')
-        
-        
+                
         try:
             db.session.commit()
             flash('Event updated successfully', 'success')
@@ -157,10 +162,7 @@ def manage(event_id):
         except Exception as e:
             db.session.rollback()
             flash(f'Error updating the event: {str(e)}', 'error')
-    
-
-    # Automatically update the event's status (if you have such a method on your Event model)
-    event.update_status()
+        
     db.session.commit()
 
     return render_template('events/manage.html', form=form, event=event)
