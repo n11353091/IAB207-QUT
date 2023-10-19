@@ -36,6 +36,7 @@ class EventForm(FlaskForm):
     FileAllowed(ALLOWED_FILE, message='Only supports png,jpg,JPG,PNG')])
 
   submit = SubmitField("Create")
+  cancel = SubmitField('Cancel Event')
 
 #creates the login information
 class LoginForm(FlaskForm):
