@@ -7,27 +7,8 @@
       <div class="col-md-12">
         <div class="container col-md-8 my-5 p-4 bg-light rounded shadow">
           <h2>Manage Event</h2>
-          
-          <form method="post" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
 
-            <!-- Render individual fields. This is just a basic example; you can style it as you want -->
-            {{ wtf.form_field(form.name) }}
-            {{ wtf.form_field(form.type) }}
-            {{ wtf.form_field(form.event_date) }}
-            {{ wtf.form_field(form.start_time) }}
-            {{ wtf.form_field(form.end_time) }}
-            {{ wtf.form_field(form.location) }}
-            {{ wtf.form_field(form.description) }}
-            {{ wtf.form_field(form.expire_date) }}
-            {{ wtf.form_field(form.image) }}
-            
-            <div class="form-group">
-              {{ form.submit(class_="btn btn-success") }}
-              {{ form.cancel(class_="btn btn-danger") }}  <!-- Here's the cancel button -->
-            </div>
-
-          </form>
+          {{ wtf.quick_form(form) }}
 
           <a href="{{ url_for('event.create') }}" class="btn btn-primary">Create New Event</a>
         </div>
