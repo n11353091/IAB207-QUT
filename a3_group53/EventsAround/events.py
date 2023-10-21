@@ -84,16 +84,16 @@ def check_upload_file(form):
   fp.save(upload_path)
   return db_upload_path
 
-@bp.route('/<event>/comment', methods = ['GET', 'POST'])  
+@bp.route('/<id>/comment', methods = ['GET', 'POST'])  
 @login_required
-def comment(event):  
+def comment(id):  
     form = CommentForm()  
-    #get the destination object associated to the page and the comment
-    event_obj = Event.query.filter_by(id=event).first()  
+    #get the event object associated to the page and the comment
+    event =  db.session.scalar(db.select(Event).where(Event.id==id)) 
     if form.validate_on_submit():  
       #read the comment from the form
       comment = Comment(text=form.text.data,  
-                        event=event_obj,
+                        event=event,
                         user=current_user) 
       #here the back-referencing works - comment.destination is set
       # and the link is created
@@ -104,7 +104,7 @@ def comment(event):
       #flash('Your comment has been added', 'success')  
       print('Your comment has been added', 'success') 
     # using redirect sends a GET request to destination.show
-    return redirect(url_for('event.show', id=event))
+    return redirect(url_for('event.show', id=id))
 
 @bp.route('/<event>/book', methods = ['GET', 'POST'])  
 @login_required

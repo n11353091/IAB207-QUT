@@ -29,7 +29,7 @@ class Event(db.Model):
     #price = db.Column(db.Integer) #no need for price as it is always free
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
-    comment_id = db.relationship('Comment', backref='event')
+    comments = db.relationship('Comment', backref='event')
 	
     # string print method
     def __repr__(self):
