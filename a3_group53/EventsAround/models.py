@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     address = db.Column(db.String(255))
     # relation to call user.comments and comment.created_by
     comments = db.relationship('Comment', backref='user')
+    orders = db.relationship('Order', backref='user')
 
 class Event(db.Model):
     __tablename__ = 'events'
@@ -30,7 +31,7 @@ class Event(db.Model):
     # ... Create the Comments db.relationship
 	# relation to call destination.comments and comment.destination
     comments = db.relationship('Comment', backref='event')
-	
+    orders = db.relationship('Order', backref='event', foreign_keys='Order.event_id')
     # string print method
     def __repr__(self):
         return f"Name: {self.name}"
@@ -47,6 +48,8 @@ class Order(db.Model):
     ticket_number = db.Column(db.Integer)
     event_image = db.Column(db.String(400), db.ForeignKey('events.image'))
     event_name = db.Column(db.String(80), db.ForeignKey('events.name'))
+
+
     # string print method
     def __repr__(self):
         return f"Order: {self.id} Booking Date: {self.created_at} Event Info: {self.event_name} Event Picture: {self.event_image}"
