@@ -32,7 +32,7 @@
         {% for comment in event.comments %}
         <div class="d-flex flex-row align-items-center commented-user">
           <h5 class="mr-2">{{comment.user.name}}</h5><span class="dot mb-1"></span><span
-            class="mb-1 ml-2">{{comment.created_at}}</span>
+            class="mb-1 ml-2">{{comment.created_at.strftime('%Y-%m-%d %H:%M:%S')}}</span>
         </div>
         <div class="comment-text-sm"><span>{{comment.text}}</span></div>
         {% endfor %}

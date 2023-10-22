@@ -30,7 +30,7 @@
         {% for order in current_user.orders %} <!-- if doesn't work, try orders.user_id-->
         <tr>
           <th scope="row">{{order.id}}</th>
-          <td>{{order.created_at}}</td>
+          <td>{{order.created_at.strftime('%Y-%m-%d %H:%M:%S')}}</td>
           <td>{{order.event_name}}</td>
           <td><img class="img-fluid" style="max-width:150px;" src="{{order.event_image}}" alt="qut pitch night"></td>
           <td>{{order.ticket_type}}</td>
