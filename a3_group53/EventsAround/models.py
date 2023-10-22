@@ -28,8 +28,10 @@ class Event(db.Model):
     image = db.Column(db.String(400))
     expire_date = db.Column(db.String)
     #price = db.Column(db.Integer) #no need for price as it is always free
-    # ... Create the Comments db.relationship
-	# relation to call destination.comments and comment.destination
+    # ... Create the Comments and Orders db.relationship
+	# relation to call event.comments and comment.event
+    # ... Create the Events and Orders db.relationship
+	# relation to call event.orders and orders.event
     comments = db.relationship('Comment', backref='event')
     orders = db.relationship('Order', backref='event', foreign_keys='Order.event_id')
     # string print method

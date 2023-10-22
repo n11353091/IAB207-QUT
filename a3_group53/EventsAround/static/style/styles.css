@@ -1,35 +1,42 @@
-*
-{
+* {
   margin: 0;
   padding: 0;
 }
 
-body{
+body {
   font-family: sans-serif;
 }
+
 .navbar {
-  background-image: linear-gradient(to right, orangered, orange );
+  background-image: linear-gradient(to right, orangered, orange);
   margin-bottom: 50px;
 }
+
 .btn-light-blue {
-  background-color: rgb(50, 195, 243); /* Set the background color to light blue */
-  border-color: rgb(50, 195, 243); /* Set the border color to light blue */
-  color: white; /* Set the text color (e.g., dark gray) */
+  background-color: rgb(50, 195, 243);
+  /* Set the background color to light blue */
+  border-color: rgb(50, 195, 243);
+  /* Set the border color to light blue */
+  color: white;
+  /* Set the text color (e.g., dark gray) */
 }
-.ticket-table{
+
+.ticket-table {
   margin-top: 60px;
 }
 
 .chevron-container {
   display: flex;
-  flex-direction: row; /* Ensure horizontal alignment */
+  flex-direction: row;
+  /* Ensure horizontal alignment */
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px; /* Add padding to create space for the first arrow */
+  padding: 10px;
+  /* Add padding to create space for the first arrow */
 }
 
-                                  /* Final BLUE chevron arrow */
+/* Final BLUE chevron arrow */
 .chevron-blue-right {
   position: relative;
   text-align: center;
@@ -47,7 +54,7 @@ body{
   left: 0;
   height: 50%;
   width: 100%;
-  background: linear-gradient(to right, blue, #2196F3 );
+  background: linear-gradient(to right, blue, #2196F3);
   transform: skew(25deg, 0deg);
 }
 
@@ -58,11 +65,11 @@ body{
   left: 0;
   height: 50%;
   width: 100%;
-  background: linear-gradient(to right, blue, #2196F3 ); 
+  background: linear-gradient(to right, blue, #2196F3);
   transform: skew(-25deg, 0deg);
 }
 
-                                  /* Final ORANGE chevron arrow */
+/* Final ORANGE chevron arrow */
 .chevron-orange-right {
   position: relative;
   text-align: center;
@@ -79,7 +86,7 @@ body{
   left: 0;
   height: 50%;
   width: 100%;
-  background: linear-gradient(to right, orangered, orange ); 
+  background: linear-gradient(to right, orangered, orange);
   transform: skew(25deg, 0deg);
 }
 
@@ -90,7 +97,7 @@ body{
   left: 0;
   height: 50%;
   width: 100%;
-  background: linear-gradient(to right, orangered, orange );
+  background: linear-gradient(to right, orangered, orange);
   transform: skew(-25deg, 0deg);
 }
 
@@ -99,8 +106,8 @@ body{
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white; 
-  font-size: 16px; 
+  color: white;
+  font-size: 16px;
 }
 
 
@@ -127,7 +134,7 @@ form.search button {
   float: left;
   width: 20%;
   padding: 14.5px;
-  background: linear-gradient(to right, blue, #2196F3 );
+  background: linear-gradient(to right, blue, #2196F3);
   color: white;
   font-size: 17px;
   border: 1px solid grey;
@@ -136,7 +143,7 @@ form.search button {
 }
 
 form.search button:hover {
-  background: linear-gradient(to right, blue, #2196F3 );
+  background: linear-gradient(to right, blue, #2196F3);
 }
 
 /* Clear floats */
@@ -154,6 +161,7 @@ form.search::after {
 .pagination-container {
   max-width: 100px;
 }
+
 .pagination a {
   color: black;
   float: left;
@@ -171,8 +179,11 @@ form.search::after {
 }
 
 /* Page heading text colour for future*/
-.page-heading{
-  color:#2196F3;
+.page-heading {
+  color: #2196F3;
 }
+
 /* Add a grey background color on mouse-over */
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
