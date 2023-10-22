@@ -46,8 +46,15 @@ class Order(db.Model):
     event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
     ticket_type = db.Column(db.String)
     ticket_number = db.Column(db.Integer)
-    event_image = db.Column(db.String(400), db.ForeignKey('events.image'))
-    event_name = db.Column(db.String(80), db.ForeignKey('events.name'))
+    # Add event_name and event_image columns to the database
+    event_name = db.Column(db.String(80))
+    event_image = db.Column(db.String(400))
+    def __init__(self, **kwargs):
+        super(Order, self).__init__(**kwargs)
+        if self.event:
+            # Set event_name and event_image when an event is associated with the order
+            self.event_name = self.event.name
+            self.event_image = self.event.image
 
 
     # string print method
