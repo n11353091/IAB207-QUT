@@ -6,43 +6,41 @@
 <div class="container col-md-6">
   <h2>Your booking history</h2>
 
-<!-- Search -->
-    <form class="search">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+  <!-- Search -->
+  <form class="search">
+    <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
 
-<!-- List of events -->
-<div class="container">
-<table class="table table-bordered mt-3">
-    <thead>
-      <tr>
-        <th class="col-sm-1">Booking ID</th>
-        <th scope="col">Booking Date</th>
-        <th scope="col">Event Title</th>
-        <th scope="col">Event Picture</th>
-        <th scope="col">Ticket type</th>
-        <th scope="col">Number of tickets</th>
+  <!-- List of events -->
+  <div class="container">
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th class="col-sm-1">Booking ID</th>
+          <th scope="col">Booking Date</th>
+          <th scope="col">Event Title</th>
+          <th scope="col">Event Picture</th>
+          <th scope="col">Ticket type</th>
+          <th scope="col">Number of tickets</th>
 
-      </tr>
-    </thead>
-    <tbody>
-      {% for order in current_user.orders %} <!-- if doesn't work, try orders.user_id-->
-      <tr>
-        <th scope="row">{{order.id}}</th>
-        <td>{{order.date}}</td>
-        <td>{{order.event_name}}</td>
-        <td>{{order.event_name}}</td>
-        <td><img class="img-fluid" style="max-width:150px;" src="{{order.event_image}}" 
-          alt="qut pitch night"></td>
-        <td>{{order.ticket_type}}</td>
-        <td>{{order.ticket_number}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in current_user.orders %} <!-- if doesn't work, try orders.user_id-->
+        <tr>
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.created_at}}</td>
+          <td>{{order.event_name}}</td>
+          <td><img class="img-fluid" style="max-width:150px;" src="{{order.event_image}}" alt="qut pitch night"></td>
+          <td>{{order.ticket_type}}</td>
+          <td>{{order.ticket_number}}</td>
 
-      </tr>
-      {% endfor %}
-    </tbody>
-</table>
-</div>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% endblock %}

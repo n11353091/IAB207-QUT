@@ -106,18 +106,22 @@ def comment(id):
     # using redirect sends a GET request to destination.show
     return redirect(url_for('event.show', id=id))
 
-@bp.route('/<event>/book', methods = ['GET', 'POST'])  
+@bp.route('/<id>/book', methods = ['GET', 'POST'])  
 @login_required
-def book(event):
+def book(id):
    form = OrderForm()
+   #get the order object associated to the user and the event
+   event = Event.query.get(id)
    if form.validate_on_submit():
       order = Order(
          ticket_number=form.ticket_number.data,
          ticket_type=form.ticket_type.data,
+         event=event,
+         user=current_user
          )
       db.session.add(order) # add the object to the db session
       db.session.commit()
-      return redirect(url_for('event.book')) 
+      return redirect(url_for('event.book',id=id)) 
    return render_template('events/book.html', form=form)
 
 # @bp.route('/<event>/manage', methods=['GET', 'POST'])
