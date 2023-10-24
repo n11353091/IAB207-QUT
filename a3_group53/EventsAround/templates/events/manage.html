@@ -8,9 +8,12 @@
         <div class="container col-md-8 my-5 p-4 bg-light rounded shadow">
           <h2>Manage Event</h2>
 
-          {{ wtf.quick_form(form) }}
+          {{wtf.render_form(form)}}
 
           <a href="{{ url_for('event.create') }}" class="btn btn-primary">Create New Event</a>
+          <form method="post" action="{{ url_for('event.delete_event', event_id=event.id) }}">
+              <input type="submit" class="btn btn-danger" value="Delete Event">
+          </form>
         </div>
       </div>
     </div>

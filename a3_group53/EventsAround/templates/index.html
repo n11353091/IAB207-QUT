@@ -9,7 +9,7 @@
             <h1 class="text-center mb-3">Find our best travel deals</h1>
 
             <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}">
-               <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+               <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm1">
                <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
             </form>
 
@@ -36,7 +36,7 @@
 <div class="container col-md-6">
    <!-- Search -->
    <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
-      <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm">
+      <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm2">
       <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
     </form>
 </div>
@@ -79,20 +79,21 @@
 <!-- Add the title "Popular business events in your area" here -->
 <h2 class="text-center mb-4">Popular Business and Networking events in your area:</h2>
 <div class="container">
-   <div class="card-group">
-      <div class="card mx-3">
-         {% for event in events %}
-         <img class="card-img-top" src={{event.image}} alt="event picture">
-         <div class="card-body">
-            <h5><a href="{{url_for('event.show', id=event.id)}}" class="card-title">{{event.name}}</a></h5>
-            <p class="card-text">{{event.date}} {{event.time}} <br>
-               {{event.location}} <br>
-               Status: <button type="button" class="btn btn-success">{{event.status}}</button>
-            </p>
-         </div>
-         <div class="card-footer"><small class="text-muted">Last updated at XX:XX</small></div>
-         {% endfor %}
-      </div>
-   </div>
+    <div class="card-group">
+        {% for event in events %}
+            <div class="card mx-3">
+                <img class="card-img-top" src="{{ event.image }}" alt="event picture">
+                <div class="card-body">
+                    <h5><a href="{{ url_for('event.show', id=event.id) }}" class="card-title">{{ event.name }}</a></h5>
+                    <p class="card-text">{{ event.date }} {{ event.time }} <br>
+                        {{ event.location }} <br>
+                        Status: <button type="button" class="btn btn-success">{{ event.status }}</button>
+                    </p>
+                    <a href="{{ url_for('event.manage', event_id=event.id) }}" class="btn btn-primary">Edit</a>
+                </div>
+                <div class="card-footer"><small class="text-muted">Last updated at XX:XX</small></div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
