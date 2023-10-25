@@ -37,38 +37,47 @@ def search():
         return redirect(url_for('events.search'))
     return render_template('events/search.html', form=form, events=events)
 
-@bp.route('/create', methods = ['GET', 'POST'])
+
+from flask_login import current_user  # ensure you've imported this
+
+
+@bp.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
-  print('Method type: ', request.method)
-  form = EventForm()
-  if form.validate_on_submit():
-    #call the function that checks and returns image
-    db_file_path=check_upload_file(form)
-    event=Event(name=form.name.data,
-                type=form.type.data,
-                event_date=form.event_date.data,
-                start_time=form.start_time.data,
-                end_time=form.end_time.data,
-                location=form.location.data,
-                description=form.description.data, 
-                expire_date=form.expire_date.data, 
-                image=db_file_path,
-                )
-    # add the object to the db session
-    db.session.add(event)
-    # commit to the database
-    try:
-       db.session.add(event)
-       db.session.commit()
-       print('Successfully created new event', 'success')
-       return redirect(url_for('event.create'))
-    except Exception as e:
-        db.session.rollback()
-        print(f'Error creating new travel event: {str(e)}', 'error')
-        print('Successfully created new travel event', 'success')
-    return redirect(url_for('event.create'))  # Redirect to the 'event.create' route within the 'event' blueprint
-  return render_template('events/create.html', form=form)
+    print('Method type: ', request.method)
+    form = EventForm()
+    if form.validate_on_submit():
+        # Call the function that checks and returns image
+        db_file_path = check_upload_file(form)
+
+        # Include owner_id when creating the event
+        event = Event(name=form.name.data,
+                      type=form.type.data,
+                      event_date=form.event_date.data,
+                      start_time=form.start_time.data,
+                      end_time=form.end_time.data,
+                      location=form.location.data,
+                      description=form.description.data,
+                      expire_date=form.expire_date.data,
+                      image=db_file_path,
+                      owner_id=current_user.id  # Set the owner of the event
+                      )
+        # Add the object to the db session and commit to the database
+        try:
+            db.session.add(event)
+            db.session.commit()
+            print('Successfully created new event', 'success')
+            return redirect(url_for('event.create'))
+        except Exception as e:
+            db.session.rollback()
+            print(f'Error creating new travel event: {str(e)}', 'error')
+            print('Successfully created new travel event',
+                  'success')  # This seems odd. If there's an error, why print a success message?
+
+        return redirect(url_for('event.create'))  # Redirect to the 'event.create' route within the 'event' blueprint
+
+    return render_template('events/create.html', form=form)
+
 
 def check_upload_file(form):
   #get file data from form  
@@ -124,17 +133,73 @@ def book(id):
       return redirect(url_for('event.book',id=id)) 
    return render_template('events/book.html', form=form)
 
-# @bp.route('/<event>/manage', methods=['GET', 'POST'])
-# @login_required
-# def manage(event_id):
-#     event = Event.query.get(event_id)
-#     form = EventForm(obj=event)  # Populate the form with the event's data
 
-#     if form.validate_on_submit():
-#         # Update the event data
-#         form.populate_obj(event)
-#         db.session.commit()
-#         flash('Event updated successfully', 'success')
-#         return redirect(url_for('event.manage', event_id=event_id))
+@bp.route('/<int:event_id>/delete', methods=['POST'])
+@login_required
+def delete_event(event_id):
+    event = Event.query.get_or_404(event_id)
 
-#     return render_template('events/manage.html', form=form, event=event)
+    db.session.delete(event)
+    db.session.commit()
+    flash('Event has been deleted.', 'success')
+    return redirect(url_for('main.index'))
+@bp.route('/<int:event_id>/manage', methods=['GET', 'POST'])
+@login_required
+def manage(event_id):
+    event = Event.query.get_or_404(event_id)
+    form = EventForm()
+
+    # Check event ownership
+    if current_user.id != event.owner_id:
+        flash('You do not have permission to manage this event.', 'danger')
+        return redirect(url_for('main.index'))
+
+    if request.method == 'GET':
+        # Populate the form fields with the existing event data
+        populate_form_with_event_data(form, event)
+
+    elif form.validate_on_submit():
+        # Update the event attributes with the form data
+        update_event_from_form(event, form)
+        try:
+            db.session.commit()
+            flash('Event updated successfully', 'success')
+            return redirect(url_for('event.details', event_id=event_id))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error updating the event: {str(e)}', 'error')
+            return redirect(url_for('events.manage', event_id=event_id))
+
+    return render_template('events/manage.html', form=form, event=event)
+
+
+from datetime import datetime
+
+def populate_form_with_event_data(form, event):
+    form.name.data = event.name
+    form.type.data = event.type
+    form.status.data = event.status
+    form.event_date.data = datetime.strptime(event.event_date, "%Y-%m-%d").date() if isinstance(event.event_date, str) else event.event_date
+    form.start_time.data = event.start_time
+    form.end_time.data = event.end_time
+    form.location.data = event.location
+    form.description.data = event.description
+    form.expire_date.data = datetime.strptime(event.expire_date, "%Y-%m-%d").date() if isinstance(event.expire_date, str) else event.expire_date
+    # Note: you may need additional logic for the image field
+
+    # Note: you may need additional logic for the image field
+
+
+def update_event_from_form(event, form):
+    event.name = form.name.data
+    event.type = form.type.data
+    event.status = form.status.data
+    event.event_date = form.event_date.data
+    event.start_time = form.start_time.data
+    event.end_time = form.end_time.data
+    event.location = form.location.data
+    event.description = form.description.data
+    event.expire_date = form.expire_date.data
+    # Handle the image logic here if necessary
+
+

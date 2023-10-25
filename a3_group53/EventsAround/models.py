@@ -13,10 +13,12 @@ class User(db.Model, UserMixin):
     # relation to call user.comments and comment.created_by
     comments = db.relationship('Comment', backref='user')
     orders = db.relationship('Order', backref='user')
+    events = db.relationship('Event', backref='owner')
 
 class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(80))
     type = db.Column(db.String(20))
     status = db.Column(db.String, default = "Open")
