@@ -168,8 +168,8 @@ def manage(event_id):
         except Exception as e:
             db.session.rollback()
             flash(f'Error updating the event: {str(e)}', 'error')
-            return redirect(url_for('events.manage', event_id=event_id))
 
+            return redirect(url_for('event.manage', event_id=event_id))
     return render_template('events/manage.html', form=form, event=event)
 
 
