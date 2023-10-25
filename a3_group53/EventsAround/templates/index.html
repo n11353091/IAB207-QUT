@@ -95,7 +95,8 @@
             <a href="{{ url_for('event.manage', event_id=event.id) }}" class="btn btn-primary">Edit</a>
             {% endif %}
          </div>
-         <div class="card-footer"><small class="text-muted">Last updated at XX:XX</small></div>
+         <div class="card-footer"><small class="text-muted">Last updated at
+               {{event.last_updated.strftime('%H:%M')}}</small></div>
       </div>
       {% endfor %}
    </div>

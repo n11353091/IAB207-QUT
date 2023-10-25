@@ -29,6 +29,7 @@ class Event(db.Model):
     description = db.Column(db.String(200))
     image = db.Column(db.String(400))
     expire_date = db.Column(db.String)
+    last_updated = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
     #price = db.Column(db.Integer) #no need for price as it is always free
     # ... Create the Comments and Orders db.relationship
 	# relation to call event.comments and comment.event
