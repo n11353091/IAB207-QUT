@@ -108,6 +108,8 @@ body {
   transform: translate(-50%, -50%);
   color: white;
   font-size: 16px;
+  border: none;
+  background-color: transparent;
 }
 
 
@@ -186,4 +188,8 @@ form.search::after {
 /* Add a grey background color on mouse-over */
 .pagination a:hover:not(.active) {
   background-color: #ddd;
+}
+
+.indexCategoryButtton {
+  background-color: red
 }

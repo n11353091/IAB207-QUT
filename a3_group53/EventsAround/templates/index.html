@@ -38,43 +38,64 @@
 
    <form class="form-inline d-flex flex-nowrap" action="{{url_for('main.search')}}" >
       <input type="text" name="search" class="form-control flex-grow-1 my-1 mr-sm-2" id="SearchForm2">
-      <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Submit</button>
+      <button type="submit" class="flex-shrink-1 btn btn-primary my-1">Search</button>
     </form>
 </div>
 </header>
 
-<div class="chevron-container">
-   <div class="chevron-orange-right">
-      <span class="chevron-text">Career</span>
-   </div>
-   <div class="chevron-orange-right">
-      <span class="chevron-text">Health</span>
-   </div>
-   <div class="chevron-orange-right">
-      <span class="chevron-text">Sales</span>
-   </div>
-   <div class="chevron-orange-right">
-      <span class="chevron-text">Tradeshows</span>
-   </div>
-   <div class="chevron-orange-right">
-      <span class="chevron-text">Business</span>
-   </div>
+<!-- Category search buttons -->
+<div class="chevron-container" >
+
+   <form class="chevron-orange-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="career" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Career</button>
+   </form>
+
+   <form class="chevron-orange-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Health" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Health</button>
+   </form>
+
+   <form class="chevron-orange-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Sales" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Sales</button>
+   </form>
+
+   <form class="chevron-orange-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Tradeshows" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Tradeshows</button>
+   </form>
+
+   <form class="chevron-orange-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Business" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Business</button>
+   </form>
+
 </div>
 </div>
 
 <div class="chevron-container">
-   <div class="chevron-blue-right">
-      <span class="chevron-text">Networking</span>
-   </div>
-   <div class="chevron-blue-right">
-      <span class="chevron-text">Education</span>
-   </div>
-   <div class="chevron-blue-right">
-      <span class="chevron-text">Marketing</span>
-   </div>
-   <div class="chevron-blue-right">
-      <span class="chevron-text">Innovation</span>
-   </div>
+
+   <form class="chevron-blue-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Networking" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Networking</button>
+   </form>
+
+   <form class="chevron-blue-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Education" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Education</button>
+   </form>
+
+   <form class="chevron-blue-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Marketing" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Marketing</button>
+   </form>
+
+   <form class="chevron-blue-right" name="search" action="{{url_for('main.search')}}">
+      <input type="text" name="search" value="Innovation" class="form-control flex-grow-1 my-1 mr-sm-2" >
+      <button class="chevron-text" >Innovation</button>
+   </form>
+
 </div>
 
 <!-- Add the title "Popular business events in your area" here -->
