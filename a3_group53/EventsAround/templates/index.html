@@ -102,9 +102,9 @@
 <h2 class="text-center mb-4">Popular Business and Networking events in your area:</h2>
 <div class="container">
 
-   <div class="card-group">
+   <div class="card-body">
       {% for event in events %}
-      <div class="card mx-3">
+      <div class="card mx-3" style="margin-bottom: 4rem;">
          <img class="card-img-top" src="{{ event.image }}" alt="event picture">
          <div class="card-body">
             <h5><a href="{{ url_for('event.show', id=event.id) }}" class="card-title">{{ event.name }}</a></h5>
@@ -121,7 +121,7 @@
          <div class="card-footer"><small class="text-muted">Last updated at
                {{event.last_updated.strftime('%H:%M')}}</small></div>
       </div>
-      {% endfor %}
+   {% endfor %}
    </div>
 
 </div>
