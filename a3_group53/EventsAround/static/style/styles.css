@@ -12,14 +12,15 @@ body {
   margin-bottom: 50px;
 }
 
-.btn-light-blue {
-  background-color: rgb(50, 195, 243);
+/* .btn-light-blue {
+  background-color: rgb(50, 195, 243); */
   /* Set the background color to light blue */
-  border-color: rgb(50, 195, 243);
+  /* border-color: rgb(50, 195, 243); */
   /* Set the border color to light blue */
-  color: white;
+  /* color: white; */
   /* Set the text color (e.g., dark gray) */
-}
+/* } */
+
 
 .ticket-table {
   margin-top: 60px;
