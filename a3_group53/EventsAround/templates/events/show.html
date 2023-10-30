@@ -41,8 +41,16 @@
   </div>
 
 </div>
+{% if event.status|lower == 'closed' %}<button class="flex-shrink-1 btn btn-primary btn-light-blue col-lg-12"
+  disabled>Book a
+  free spot</button>
+{% elif event.status|lower == 'sold out' %}<button class="flex-shrink-1 btn btn-primary btn-light-blue col-lg-12"
+  disabled>Book
+  a free spot</button>
+{% else %}
 <a href="{{url_for('event.book', id=event.id)}}">
   <button class="flex-shrink-1 btn btn-primary btn-light-blue col-lg-12">Book a free spot</button>
 </a>
+{% endif %}
 </div>
 {% endblock %}
