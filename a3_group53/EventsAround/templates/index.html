@@ -27,7 +27,7 @@
          <div class="card shadow p-5 mb-5 bg-light">
             <h1 class="text-center mb-3">Let Us take care of Your plans!</h1>
             </select>
-            <button a type="submit" class="flex-shrink-1 btn btn-primary btn-light-blue ms-2">Try your luck!</button>
+            <button a type="submit" class="flex-shrink-1 btn btn-primary btn-light-blue ms-2" id="randomNumber">Try your luck!</button>
             </form>
          </div>
       </div>
@@ -130,4 +130,12 @@
    </div>
 
 </div>
+<script>
+   var button = document.getElementById("randomNumber");
+   let x = 1;
+   button.addEventListener("click", function () {
+      var x = Math.floor(Math.random() * 11) + 1;
+      window.location.href = "http://127.0.0.1:5000/events/" + x;
+   });
+</script>
 {% endblock %}
