@@ -11,7 +11,11 @@
   <div class="row">
     <!-- Left Column for Image -->
     <div class="col-lg-6">
-      <h4><b>{{event.name}}<button type="button" class="btn btn-success">{{event.status}}</button></b></h4>
+      <h4><b>{{event.name}}<button type="button" class="btn
+        {% if event.status|lower == 'closed' %}btn-danger
+        {% elif event.status|lower == 'sold out' %}btn-warning
+        {% elif event.status|lower == 'open' %}btn-success
+        {% endif %}">{{event.status}}</button></b></h4>
       <!-- Make open status stand out like a button -->
       <p>{{event.description}}</p>
     </div>
